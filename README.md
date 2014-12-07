@@ -109,3 +109,80 @@ The boo server's port
 var db = require('boo').connect().db('my-db-name');
 assert(db instanceof boo.DB);
 ```
+
+# `new DB`
+
+## Constructor
+
+    new DB(Address address || String address || Object address || Number port || Null default)
+    
+## Static constructor
+
+```js
+require('boo').db(); // aliases= require('boo').use()
+```
+    
+### Example
+
+```js
+
+// NB `new require('boo').Net()` can also be called statically like this `require('boo').net()`
+
+new require('boo').DB(); // boo://localhost:7000/boo-db
+new require('boo').DB(9000); // boo://localhost:9000/boo-db
+new require('boo').DB('my-db'); // boo://localhost:7000/my-db
+new require('boo').DB('boo://app.com:1234/app'); // using a full address
+new require('boo').DB({  // using an object
+  'host': 'app.com',
+  'port': 1234,
+  'db': 'app'});
+```
+
+### Arguments
+
+- Address address || String address || Object address || Number port || Null default
+
+#### String address 
+
+The address (complete or partial) of the boo server
+
+##### Default 
+
+    "boo://localhost:7000/boo-db/boo-collec"
+
+#### Number port
+
+The boo server's port
+
+##### Default 
+
+    7000
+  
+## Events
+
+- error
+- done (aliases: connected, ready)
+
+### error(Error error)
+
+### done(Net connexion)
+
+## Properties
+
+- {Address} address
+
+## Methods
+
+- collection(String collectionName || Null default)
+
+### collection(String collectionName || Null default)
+
+```js
+/**
+ * @arg {String=boo-sandbox} collectionName? - the name of the collection (if empty, will use default "boo-sandbox" as collection name)
+ * @return {Collection}
+ * @example */
+
+var collection = require('boo').connect().db('my-db-name').collection('my-collection-name');
+assert(collection instanceof Collection);
+```
