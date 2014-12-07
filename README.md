@@ -42,17 +42,9 @@ boo.connect('my-db-name/my-collection-name')
 
 # Databases, collections and documents
 
-# API
-
-## Objects
-
-There are 4 main objects, all emittable:
-
-# Net
+# `new Net`
 
 ## Constructor
-
-### Usage 
 
     new Boo.Net(String address || Number port)
 
