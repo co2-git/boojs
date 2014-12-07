@@ -19,12 +19,35 @@ npm install co2-git/boojs
 
 var boo = require('boo');
 
-// Connecting to a boo server
+// Create new client
 
-boo.connect()
-  .on('connected', function (con) {
-    console.log(con);
-    });
+client = boo.client();
+
+// Create a new document
+
+client.insert('players', { name: "Toni", score: 100, team: "red" });
+
+// Update (increment Toni's score by 100)
+
+client.update('players', { name: "Toni", $inc: { score: 100 } });
+
+// Find Toni
+
+client.find('players', { name: "Toni" });
+
+// Increment each team red's players every time they have a new member
+
+client.collection('players').on('inserted', function (players) {
+
+  // For each new player
+  
+  players.forEach(function (player) {
+    if ( player.team === 'red' ) {
+      client.update('players', { team: 'red', $inc: { score: 100 } });
+    }
+  }
+});
+
 ```
 
 # Connexion
