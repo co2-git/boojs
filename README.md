@@ -39,12 +39,22 @@ client.find('players', { name: "Toni" });
 
 client.collection('players').on('inserted', function (players) {
 
-  // For each new player
+  // Find out how many of the new players are from team red
   
-  players.forEach(function (player) {
-    if ( player.team === 'red' ) {
-      client.update('players', { team: 'red', $inc: { score: 100 } });
-    }
+  var newMembers = players
+    
+    .filter(function (player) {
+      return player.team === 'red';
+    })
+    
+    .map(function (player) {
+      return { $id: player.$id };
+    });
+  
+  // Update each player of team red, except new ones
+  
+  if ( newMembers.length ) {
+    client.update('players', { team: 'red', $id: { $not: newMembers }, $inc: { score: 100 } }); 
   }
 });
 
