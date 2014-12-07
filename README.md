@@ -10,7 +10,7 @@ boo is a database written in JavaScript with the following features:
 # Install
 
 ```bash
-npm install boo
+npm install co2-git/boojs
 ```
 
 # Usage
@@ -19,23 +19,12 @@ npm install boo
 
 var boo = require('boo');
 
-boo.connect('my-db-name/my-collection-name')
+// Connecting to a boo server
 
-  .on('connected', function (con, db, collection) {
-
-    collection.find()
-
-      .on('found', function (found) {
-        console.log(found);
-        });
-
-    // Insert into a collection when another one gets updated
-
-    db.collection('another-collection')
-
-      .pipe(collection, { on: 'updated' });
-
-  });
+boo.connect()
+  .on('connected', function (con) {
+    console.log(con);
+    });
 ```
 
 # Connexion
@@ -105,109 +94,18 @@ The boo server's port
 
 - db(String dbName)
 
-### db(String dbName)
+### db()
+
+```js
+/**
+ * @arg {String=boo-db} dbName - the name of the database (if empty, will use default "boo-db" as database name)
+ * @return {boo.DB}
+ * @example */
+
+var db = require('boo').connect().db('my-db-name');
+assert(db instanceof boo.DB);
+```
 
 #### Return
 
     boo.DB
-    
-
-# DB
-
-## Events
-
-- #created a new collection has been created
-- #dropped a collection has been deleted
-
-
-- Methods
-    - show
-    - collection(String collectionName)
-- Collection
-  - Methods
-    - find()
-    - insert()
-    - update()
-    - remove()
-    - drop()
-- Document
-  - Methods
-    - update()
-    - remove()
-
-There are 1 utility object, non emittable:
-
-- Boo.Address
-
-Main objects can be instantiated by calling an module's exported sugar method, which name is the one of the object in lower case.
-
-```js
-boo.net(); // is the same then `new boo.Net()`
-boo.db(); // is the same then `new boo.DB()`
-// etc.
-```
-
-### Sugar aliases
-
-```js
-boo.connect(); // alias of boo.net();
-
-boo.use(); // alias of boo.db();
-
-boo.table(); // alias of boo.collection();
-
-// Aliases of boo.find()
-boo.view();
-boo.select();
-boo.get();
-
-// Aliases of boo.insert()
-boo.view();
-boo.select();
-boo.get();
-```
-
-## boo
-
-### boo.connect()
-
-```js
-
-boo.connect();
-
-// Or
-
-new Boo
-
-#### Events
-
-## db
-
-## collection
-
-### collection.find(Query || null)
-
-Use the find method to retrieve documents from a collection.
-
-```js
-collection.find()
-  .on('error', function (error) {})
-  .on('empty', function () {})
-  .on('found', function (documents) {});
-```
-
-#### Events
-
-##### error
-
-##### empty
-
-##### found
-
-##### done
-
-### collection.insert(Document || [Document])
-
-### collection.update(Query, Document)
-
-### collection.remove(Query || null)
