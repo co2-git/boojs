@@ -92,20 +92,16 @@ The boo server's port
 
 ## Methods
 
-- db(String dbName)
+- db(String dbName || Null default)
 
-### db()
+### db(String dbName || Null default)
 
 ```js
 /**
- * @arg {String=boo-db} dbName - the name of the database (if empty, will use default "boo-db" as database name)
+ * @arg {String=boo-db} dbName? - the name of the database (if empty, will use default "boo-db" as database name)
  * @return {boo.DB}
  * @example */
 
 var db = require('boo').connect().db('my-db-name');
 assert(db instanceof boo.DB);
 ```
-
-#### Return
-
-    boo.DB
