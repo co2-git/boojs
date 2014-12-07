@@ -250,9 +250,9 @@ The boo server's port
 
 ## Methods
 
-- collection(String collectionName || Null default)
+- find(Object query || Null default)
 
-### collection(String collectionName || Null default)
+### find(Query query || Null default)
 
 ```js
 /**
@@ -260,6 +260,6 @@ The boo server's port
  * @return {Collection}
  * @example */
 
-var collection = require('boo').connect().db('my-db-name').collection('my-collection-name');
-assert(collection instanceof Collection);
+var documents = collection.find({});
+assert(documents instanceof Query);
 ```
