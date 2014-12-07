@@ -90,6 +90,10 @@ The boo server's port
 
 ### done(Net connexion)
 
+## Properties
+
+- {Address} address
+
 ## Methods
 
 - db(String dbName || Null default)
