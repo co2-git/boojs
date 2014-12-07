@@ -54,7 +54,10 @@ client.collection('players').on('inserted', function (players) {
   // Update each player of team red, except new ones
   
   if ( newMembers.length ) {
-    client.update('players', { team: 'red', $id: { $not: newMembers }, $inc: { score: 100 } }); 
+    client.update('players', {
+      team: 'red',
+      $id: { $not: newMembers },
+      $inc: { score: ( 100 * newMembers.length ) } }); 
   }
 });
 
