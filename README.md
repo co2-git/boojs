@@ -71,18 +71,19 @@ client.collection('players').on('inserted', function (players) {
   - **Inherits**
   - EventEmitter
   - Query
+  - Socket
   - **Events**
   - #error
-  - #connected
+  - #socket
   - #log
   - **Members**
-  - Address address
-  - Connexion connexion
+  - Socket socket
   - **Methods**
   - db(String dbName)
+  - collection(String collectionName)
   - **Static Methods**
   - prettyTerminalOutput(Object log)
-- Connexion
+- Socket
   - **Inherits**
   - EventEmitter
   - **Events**
@@ -90,7 +91,8 @@ client.collection('players').on('inserted', function (players) {
   - #connected
   - #log
   - **Members**
-  - Socket socket
+  - Address address
+  - <net>Socket socket
   - **Methods**
   - write(Object message)
 - Server
@@ -106,6 +108,41 @@ client.collection('players').on('inserted', function (players) {
   - <net>Server service
   - **Methods**
   - create()
+- Query
+  - **Inherits**
+  - EventEmitter
+  - **Events**
+  - #error
+  - #done
+  - #log
+  - **Members**
+  - **Methods**
+  - insert()
+  - update()
+  - updateOne()
+  - updateById()
+  - find()
+  - findOne()
+  - findById()
+  - remove()
+  - removeOne()
+  - removeById()
+- Document
+  - **Inherits**
+  - EventEmitter
+  - Query
+  - **Members**
+  - **Methods**
+  - clone(Number times)
+  - update()
+  - updateOne()
+  - updateById()
+  - find()
+  - findOne()
+  - findById()
+  - remove()
+  - removeOne()
+  - removeById()
 
 # `Client`
 
