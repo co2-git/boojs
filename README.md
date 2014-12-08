@@ -67,6 +67,46 @@ client.collection('players').on('inserted', function (players) {
 
 # Databases, collections and documents
 
+- Client
+  - **Inherits**
+  - EventEmitter
+  - Query
+  - **Events**
+  - #error
+  - #connected
+  - #log
+  - **Members**
+  - Address address
+  - Connexion connexion
+  - **Methods**
+  - db(String dbName)
+  - **Static Methods**
+  - prettyTerminalOutput(Object log)
+- Connexion
+  - **Inherits**
+  - EventEmitter
+  - **Events**
+  - #error
+  - #connected
+  - #log
+  - **Members**
+  - Socket socket
+  - **Methods**
+  - write(Object message)
+- Server
+  - **Inherits**
+  - EventEmitter
+  - **Events**
+  - #error
+  - #listening
+  - #log
+  - **Members**
+  - Address address
+  - Object data
+  - <net>Server service
+  - **Methods**
+  - create()
+
 # `Client`
 
 ## Constructor
