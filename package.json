@@ -6,7 +6,9 @@
   "dependencies": {
     "colors": "~1.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "~2.0.1"
+  },
   "scripts": {
     "test": "mocha",
     "start": "node server.js"
