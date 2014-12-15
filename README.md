@@ -98,6 +98,28 @@ var client = boo.client();
 var client = new (require('boo/lib/class/Client'))();
 ```
 
+# Query
+
+Special queries are prefixed by a dollar sign `$` and injected into the regular query:
+
+```js
+// Find documents which name is Joe and score is bigger than 100
+client.find({ name: 'Joe', score: { $gt: 100 } });
+```
+
+# Query operators
+
+# `$not`
+
+```js
+// Find documents which name is not Joe
+client.find({ name: { $not: 'Joe' } });
+```
+
+## Aliases
+
+- `$ne`
+
 # Test
 
 Tests are written in Mocha and shouldjs.
