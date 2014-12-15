@@ -103,22 +103,44 @@ var client = new (require('boo/lib/class/Client'))();
 Special queries are prefixed by a dollar sign `$` and injected into the regular query:
 
 ```js
-// Find documents which name is Joe and score is bigger than 100
+// name is Joe and score is greater than 100
 client.find({ name: 'Joe', score: { $gt: 100 } });
 ```
 
 # Query operators
 
-# `$not`
+## `$not`
 
 ```js
-// Find documents which name is not Joe
+// name is not Joe
 client.find({ name: { $not: 'Joe' } });
+
+// name is neither Joe nor Jessica
+client.find({ name: { $not: ['Joe', 'Jessica'] } });
 ```
 
-## Aliases
+### Aliases
 
 - `$ne`
+
+## `$in`
+
+```js
+// name is either Joe or Jessica
+client.find({ name: { $in: ['Joe', 'Jessica' ] } });
+```
+
+## `$gt`
+
+```js
+// score is greater than 100
+client.find({ score: { $gt: 100 } });
+```
+
+### Aliases
+
+- `$greaterThan`
+- `$above`
 
 # Test
 
