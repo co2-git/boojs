@@ -36,10 +36,6 @@
       Client.prototype.collection.should.be.a.Function;
     });
 
-    it ( 'should have a static method called prettyTerminalOutput', function () {
-      Client.prettyTerminalOutput.should.be.a.Function;
-    });
-
   });
 
   describe ( 'client - Instance', function () {
@@ -55,12 +51,6 @@
 
     it ( 'should have inherited from BooSocket', function () {
       for ( var method in require('../lib/class/Socket').prototype ) {
-        client.should.have.property(method).which.is.a.Function;
-      }
-    });
-
-    it ( 'should have inherited from BooQuery', function () {
-      for ( var method in require('../lib/class/Query').prototype ) {
         client.should.have.property(method).which.is.a.Function;
       }
     });

@@ -2,10 +2,10 @@
 
   'use strict';
 
-  exports.client = function () {
+  exports.client = function (address) {
     var Client = require('./lib/class/Client');
 
-    var client = new Client();
+    var client = new Client(address);
 
     return client;
   };

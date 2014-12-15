@@ -14,7 +14,7 @@
     "should": "~4.3.1"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --check-leaks -R nyan",
     "start": "node server.js"
   },
   "repository": {

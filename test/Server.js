@@ -32,16 +32,12 @@
       Server.prototype.create.should.be.a.Function;
     });
 
-    it ( 'should have a record method', function () {
-      Server.prototype.record.should.be.a.Function;
-    });
-
   });
 
   describe ( 'Server - Instance', function () {
 
     it ( 'should be an object', function () {
-      server = new Server();
+      server = new Server({ port: 3456 });
       server.should.be.an.Object;
     });
 
@@ -91,11 +87,6 @@
       server.databases.should.be.an.Object;
     });
 
-    it ( 'should have a property events which is an array', function () {
-      server.databases.should.have.property(config.address.events)
-        .which.is.an.Array;
-    });
-
   });
 
   describe ( 'server - methods - create()', function () {
@@ -113,54 +104,10 @@
       
       create.on('error', done);
 
-      create.on('listening', done);
-    });
-
-  });
-
-  describe ( 'server - methods - record()', function () {
-
-    var record, recorded;
-
-    it ( 'should be a function', function () {
-      server.record.should.be.a.Function;
-    });
-
-    it ( 'emit a recorded event', function (done) {
-      record = server.record('test', 123);
-      
-      server.on('recorded', function (record) {
-        recorded = record;
+      create.on('listening', function () {
         done();
       });
     });
-
-    it ( 'should have property event which is a string and equals test',
-      function () {
-        recorded.should.have.property('event')
-          .which.is.a.String
-          .and.equal('test');
-      });
-
-    it ( 'should have property message which is a number and equals 123',
-      function () {
-        recorded.should.have.property('message')
-          .which.is.a.Number
-          .and.equal(123);
-      });
-
-    it ( 'should have property address which is an object and is equal to server address',
-      function () {
-        recorded.should.have.property('address')
-          .which.is.an.Object
-          .and.eql(server.address);
-      });
-
-    it ( 'should have property date which is a date',
-      function () {
-        recorded.should.have.property('date')
-          .which.is.a.Date;
-      });
 
   });
 

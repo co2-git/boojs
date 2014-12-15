@@ -51,12 +51,6 @@
       socket.constructor.name.should.equal('BooSocket')
     });
 
-    it ( 'should have inherited from BooQuery', function () {
-      for ( var method in require('../lib/class/Query').prototype ) {
-        socket.should.have.property(method).which.is.a.Function;
-      }
-    });
-
     it ( 'should have inherited from EventEmitter', function () {
       for ( var method in require('events').EventEmitter.prototype ) {
         socket.should.have.property(method).which.is.a.Function;
@@ -136,7 +130,7 @@
   describe ( 'socket - methods - write()', function () {
 
     var write,
-      user_request1 = { test: 'hello' },
+      user_request1 = { insert: { t: 22 } },
       request1,
       response1;
 
@@ -144,7 +138,7 @@
       socket.write.should.be.a.Function;
     });
 
-    it ( 'should not throw errors; be a BooSocket; emit a "client request" event; emit a "server response" event', function (done) {
+    it ( 'should not throw errors; be a BooSocket; emit a "request" event; emit a "response" event', function (done) {
 
       var is_done = false;
 
@@ -156,15 +150,15 @@
 
       write.constructor.name.should.equal('BooSocket');
 
-      write.on('client request', function (request) {
-        request1 = request.toString();
+      write.on('request', function (request) {
+        request1 = request;
         if ( ! is_done ) {
           is_done = true;
           done();
         }
       });
 
-      write.on('server response', function (response) {
+      write.on('inserted', function (response) {
         response1 = response;
         if ( ! is_done ) {
           is_done = true;
@@ -173,12 +167,12 @@
       });
     });
 
-    it ( '\'s "client request" event should be the same than user request',
+    it ( '\'s "request" event should be the same than user request',
       function () {
-        JSON.parse(request1).should.eql(user_request1);
+        request1.should.eql(user_request1);
       });
 
-    it ( '\'s "server response" event should be an object',
+    it ( '\'s "response" event should be an object',
       function () {
         response1.should.be.an.Object;
       });
