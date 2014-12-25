@@ -17,6 +17,8 @@ boo.js `alpha`
                                     
                                     
                              
+```
+
 
 
                       .+~                :xx++::
@@ -86,6 +88,7 @@ boo.js `alpha`
    
 
 
+```
 
 boo is a database written in JavaScript with the following features:
 
